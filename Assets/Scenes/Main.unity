@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   MovementSpeed: 5
-  JumpPower: 10
+  JumpPower: 11
   CoyoteTime: 0.5
   JumpCooldown: 0.25
   Coins: 0
