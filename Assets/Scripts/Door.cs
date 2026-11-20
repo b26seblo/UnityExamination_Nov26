@@ -25,6 +25,8 @@ public class Door : MonoBehaviour
         if (other == Player.collider)
         {
             Activated = true;
+            Player.CurrentLevel = LevelToLoad;
+            Player.instance.ResetPosition();
             SceneManager.LoadSceneAsync("Level" + LevelToLoad, LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync("Level" + LevelToUnload);
         }

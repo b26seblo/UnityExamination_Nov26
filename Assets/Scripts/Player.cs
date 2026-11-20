@@ -7,18 +7,19 @@ using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
+	public static int CurrentLevel = 1;
+	public const float GameTimeLimit = 60f * 3f;
+	
     public float MovementSpeed = 5f;
     public float JumpPower = 10f;
     public float CoyoteTime = 0.5f;
 	public float JumpCooldown = 0.25f;
-	private int _Coins = 0;
-	public int Coins { get => _Coins; set { _Coins = value; CoinsText.text = "Coins: " + _Coins; } }
+	public int Coins;
+	public int DestroyedObjects;
 	public bool Grounded = true;
 	public bool Jumping = false;
 	public LayerMask WorldLayer;
-
-	public TextMeshProUGUI CoinsText;
-
+	
 	public float IdleAnimSpeed = 2f;
 	[FormerlySerializedAs("IdleSprites")] public Sprite[] MovementSprites;
 	//public ParticleSystem DirtParticles;
@@ -29,9 +30,15 @@ public class Player : MonoBehaviour
 	private InputAction moveAction;
 	private InputAction jumpAction;
 	private Vector3 startScale;
-
+	private Vector3 startPosition;
+	
 	public static Player instance;
 	public new static CapsuleCollider2D collider;
+
+	public void ResetPosition()
+	{
+		transform.position = startPosition;
+	}
 
 	private void Awake()
 	{
@@ -47,6 +54,7 @@ public class Player : MonoBehaviour
 		moveAction = InputSystem.actions.FindAction("Move");
 		jumpAction = InputSystem.actions.FindAction("Jump");
 		startScale = transform.localScale;
+		startPosition = transform.position;
 
 		Dialog.QueueDialog("I AM ALIVE!!!!!!!!!");
 	}
